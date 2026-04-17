@@ -37,11 +37,17 @@ jobs:
 
       - name: Inject cache-bust version
         run: |
-          VERSION=$(date +%s)
-          echo "Injecting version $VERSION into index.html"
-          sed -i "s|\.js\"></script|.js?v=${VERSION}"'></script|g" dist/index.html
-          sed -i "s|\.css\">|.css?v=${VERSION}"'>|g" dist/index.html
-          cat dist/index.html
+          python3 -c "
+          import time, re, pathlib
+          v = str(int(time.time()))
+          html = pathlib.Path('dist/index.html').read_text(encoding='utf-8')
+          html = re.sub(r'(/fitguide/assets/index[^.]+\.js)', r'\1?v=' + v, html)
+          html = re.sub(r'(/fitguide/assets/index[^.]+\.css)', r'\1?v=' + v, html)
+          pathlib.Path('dist/index.html').write_text(html, encoding='utf-8')
+          print('Injected version:', v)
+          print('Script tag:', re.search(r'<script[^>]+>', html).group())
+          print('CSS link:', re.search(r'<link[^>]+stylesheet[^>]+>', html).group())
+          "
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
