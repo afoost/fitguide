@@ -110,9 +110,10 @@ function handleClick(e) {
   }
 
   // Switch training day
-  if (target.dataset.action === 'switch-day') {
-    const day = target.dataset.day;
-    showTrainingDay(day);
+  // Switch training day
+  const dayBtn = target.closest('[data-action="switch-day"]');
+  if (dayBtn) {
+    showTrainingDay(dayBtn.dataset.day);
     return;
   }
 }
