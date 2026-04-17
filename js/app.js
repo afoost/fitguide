@@ -15,7 +15,8 @@ let state = {
   goal: loadFromStorage('goal', 'maintain'),
   trainingStartDate: loadFromStorage('trainingStartDate', null),
   hasGenerated: false,
-  explanationExpanded: false
+  explanationExpanded: false,
+  selectedTrainingDay: null
 };
 
 // DOM Elements
@@ -102,7 +103,6 @@ function handleClick(e) {
   }
 
   // Switch training day
-  // Switch training day
   const dayBtn = target.closest('[data-action="switch-day"]');
   if (dayBtn) {
     showTrainingDay(dayBtn.dataset.day);
@@ -111,7 +111,7 @@ function handleClick(e) {
 }
 
 function handleChange(e) {
-  // Handle form changes if needed
+  // Reserved for future real-time form validation
 }
 
 function handleSubmit(e) {
@@ -141,6 +141,11 @@ function generatePlan() {
 
   if (!profile.bodyFrame || !profile.fatDistribution || !profile.metabolism) {
     showToast('请选择体型特征');
+    return;
+  }
+
+  if (!profile.activityLevel) {
+    showToast('请选择活动水平');
     return;
   }
 
@@ -210,17 +215,10 @@ function updateBodyType() {
 }
 
 function showTrainingDay(day) {
-  // Update active day in state, then re-render
-  const days = ['push', 'pull', 'legs'];
-  const dayIndex = days.indexOf(day);
-  const trainingDay = state.trainingStartDate ? getCurrentTrainingDay(state.trainingStartDate) : 0;
-  const isActive = dayIndex === trainingDay;
-
-  // Re-render the training tab with the selected day
-  const trainingTabEl = document.querySelector('.training-tab');
-  if (trainingTabEl) {
-    trainingTabEl.outerHTML = renderTrainingTab(day, isActive);
-  }
+  const days = ['push', 'pull', 'legs', 'rest'];
+  if (!days.includes(day)) return;
+  state.selectedTrainingDay = day;
+  render();
 }
 
 function showExerciseDetail(day, index) {
@@ -606,7 +604,7 @@ function renderTrainingTab(activeDay) {
   const trainingDay = state.trainingStartDate ? getCurrentTrainingDay(state.trainingStartDate) : 0;
 
   if (!activeDay) {
-    activeDay = days[trainingDay];
+    activeDay = state.selectedTrainingDay || days[trainingDay];
   }
 
   const bodyType = state.currentBodyType || 'mesomorph';
