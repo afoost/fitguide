@@ -37,9 +37,10 @@ function init() {
 }
 
 function bindEvents() {
-  app.addEventListener('click', handleClick);
-  app.addEventListener('change', handleChange);
-  app.addEventListener('submit', handleSubmit);
+  // Use document level to catch events from modal overlays appended to body
+  document.addEventListener('click', handleClick);
+  document.addEventListener('change', handleChange);
+  document.addEventListener('submit', handleSubmit);
 }
 
 function handleClick(e) {
