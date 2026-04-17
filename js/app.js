@@ -10,22 +10,13 @@ import {
 let state = {
   currentTab: 'home',
   profile: loadFromStorage('profile', null),
-  weightRecords: loadToStorage('weightRecords', []),
+  weightRecords: loadFromStorage('weightRecords', []),
   currentBodyType: loadFromStorage('currentBodyType', null),
-  goal: loadToStorage('goal', 'maintain'),
-  trainingStartDate: loadToStorage('trainingStartDate', null),
+  goal: loadFromStorage('goal', 'maintain'),
+  trainingStartDate: loadFromStorage('trainingStartDate', null),
   hasGenerated: false,
   explanationExpanded: false
 };
-
-function loadToStorage(key, defaultValue) {
-  try {
-    const item = localStorage.getItem(`fitguide_${key}`);
-    return item ? JSON.parse(item) : defaultValue;
-  } catch (e) {
-    return defaultValue;
-  }
-}
 
 // DOM Elements
 const app = document.getElementById('app');
@@ -125,10 +116,6 @@ function handleChange(e) {
 
 function handleSubmit(e) {
   e.preventDefault();
-
-  if (e.target.id === 'profile-form') {
-    saveProfile(e);
-  }
 }
 
 function generatePlan() {
@@ -181,9 +168,6 @@ function generatePlan() {
   showToast(`体型判断:${dietData[state.currentBodyType].label},方案已生成!`);
 }
 
-function saveProfile(e) {
-  // Already handled in generatePlan
-}
 
 function recordWeight() {
   const weightInput = document.getElementById('weight-input');
@@ -565,6 +549,10 @@ function renderProfileForm() {
                 <input type="radio" name="fatDistribution" value="lower">
                 <span>下半身<br><small>臀部/大腿</small></span>
               </label>
+              <label class="radio-item">
+                <input type="radio" name="fatDistribution" value="rare">
+                <span>很少<br><small>不易囤脂</small></span>
+              </label>
             </div>
           </div>
 
@@ -610,10 +598,10 @@ function renderProfileForm() {
 }
 
 function renderTrainingTab(activeDay) {
-  const days = ['push', 'pull', 'legs'];
-  const dayLabels = { push: 'Push Day', pull: 'Pull Day', legs: 'Legs Day' };
-  const dayIcons = { push: '推', pull: '拉', legs: '腿' };
-  const dayColors = { push: '#e74c3c', pull: '#3498db', legs: '#2ecc71' };
+  const days = ['push', 'pull', 'legs', 'rest'];
+  const dayLabels = { push: 'Push Day', pull: 'Pull Day', legs: 'Legs Day', rest: 'Rest Day' };
+  const dayIcons = { push: '推', pull: '拉', legs: '腿', rest: '休' };
+  const dayColors = { push: '#e74c3c', pull: '#3498db', legs: '#2ecc71', rest: '#95a5a6' };
 
   const trainingDay = state.trainingStartDate ? getCurrentTrainingDay(state.trainingStartDate) : 0;
 
@@ -622,7 +610,7 @@ function renderTrainingTab(activeDay) {
   }
 
   const bodyType = state.currentBodyType || 'mesomorph';
-  const currentExercises = exercises[bodyType]?.[activeDay] || exercises.mesomorph?.push || exercises.push;
+  const currentExercises = activeDay === 'rest' ? null : (exercises[bodyType]?.[activeDay] || exercises.mesomorph?.[activeDay]);
 
   return `
     <div class="training-tab">
@@ -644,7 +632,13 @@ function renderTrainingTab(activeDay) {
 
       <div class="exercises-list" style="--day-color: ${dayColors[activeDay]}">
         <h3 class="day-title">${dayLabels[activeDay]}</h3>
-        ${currentExercises.map((ex, index) => `
+        ${activeDay === 'rest' ? `
+          <div class="rest-day-message">
+            <div class="rest-icon">😴</div>
+            <p>今天好好休息！</p>
+            <p class="rest-tip">休息是为了更好地恢复和增长，配合充足睡眠和营养摄入。</p>
+          </div>
+        ` : currentExercises.map((ex, index) => `
           <div class="exercise-card" data-action="view-exercise" data-day="${activeDay}" data-index="${index}">
             <div class="exercise-header">
               <div class="exercise-name">${ex.name}</div>
@@ -753,7 +747,7 @@ function renderDietTab() {
               </div>
               <div class="nutrition-item">
                 <span class="nutrition-value">${calculateTDEE(state.profile)}</span>
-                <span class="nutrition-label">基础代谢(kcal)</span>
+                <span class="nutrition-label">每日总消耗(kcal)</span>
               </div>
             </div>
           </div>
@@ -914,6 +908,18 @@ function renderWeightChart() {
     ctx.arc(x, y, 4, 0, Math.PI * 2);
     ctx.fill();
   });
+
+  // X-axis date labels
+  const maxLabels = 5;
+  const step = Math.max(1, Math.floor(records.length / maxLabels));
+  ctx.fillStyle = '#999';
+  ctx.font = '9px sans-serif';
+  ctx.textAlign = 'center';
+  for (let i = 0; i < records.length; i += step) {
+    const x = padding + (chartWidth / (records.length - 1 || 1)) * i;
+    const dateLabel = records[i].date.slice(5); // MM-DD
+    ctx.fillText(dateLabel, x, canvas.height - padding + 15);
+  }
 }
 
 // Global function for diet type switching

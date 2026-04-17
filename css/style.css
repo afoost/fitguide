@@ -531,6 +531,29 @@ body {
   border-left: 4px solid var(--day-color, var(--primary));
 }
 
+.rest-day-message {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.rest-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.rest-day-message p {
+  margin: 8px 0;
+  color: var(--gray);
+}
+
+.rest-day-message .rest-tip {
+  font-size: 0.85rem;
+  color: var(--gray-light);
+}
+
 .exercise-card {
   background: var(--white);
   border-radius: var(--radius-md);
