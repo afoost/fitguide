@@ -226,12 +226,17 @@ function updateBodyType() {
 }
 
 function showTrainingDay(day) {
+  // Update active day in state, then re-render
   const days = ['push', 'pull', 'legs'];
   const dayIndex = days.indexOf(day);
-  const trainingDay = getCurrentTrainingDay(state.trainingStartDate);
+  const trainingDay = state.trainingStartDate ? getCurrentTrainingDay(state.trainingStartDate) : 0;
   const isActive = dayIndex === trainingDay;
 
-  renderTrainingTab(day, isActive);
+  // Re-render the training tab with the selected day
+  const trainingTabEl = document.querySelector('.training-tab');
+  if (trainingTabEl) {
+    trainingTabEl.outerHTML = renderTrainingTab(day, isActive);
+  }
 }
 
 function showExerciseDetail(day, index) {
