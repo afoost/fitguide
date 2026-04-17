@@ -11,7 +11,7 @@ export const exercises = {
       reps: '8-10',
       rest: '90秒',
       tips: '核心收紧，目视前方，推举时手臂不要完全锁死',
-      bilibili: 'https://www.bilibili.com/video/BV1Ux411v7pQ/',
+      bilibili: 'https://search.bilibili.com/video?keyword=杠铃实力举',
       youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
     },
     {
@@ -23,7 +23,7 @@ export const exercises = {
       reps: '8-12',
       rest: '90秒',
       tips: '握距略宽于肩，推到顶峰时胸肌收紧，下放时控制速度',
-      bilibili: 'https://www.bilibili.com/video/BV1ax41187Qz/',
+      bilibili: 'https://search.bilibili.com/video?keyword=杠铃卧推',
       youtube: 'https://www.youtube.com/watch?v=rT7DgCr-3pg'
     },
     {
@@ -35,7 +35,7 @@ export const exercises = {
       reps: '10-12',
       rest: '60秒',
       tips: '躺椅倾斜30-45度，哑铃置于胸部两侧，向上推起',
-      bilibili: 'https://www.bilibili.com/video/BV1JW411v7zX/',
+      bilibili: 'https://search.bilibili.com/video?keyword=哑铃上斜卧推',
       youtube: 'https://www.youtube.com/watch?v=DbFgADa2PL8'
     },
     {
@@ -47,7 +47,7 @@ export const exercises = {
       reps: '12-15',
       rest: '60秒',
       tips: '拉力器调至面部高度，双手握绳向外拉开，保持肩胛骨夹紧',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411v7Pq/',
+      bilibili: 'https://search.bilibili.com/video?keyword=绳索面拉',
       youtube: 'https://www.youtube.com/watch?v=rep-Q5COmSU'
     },
     {
@@ -59,7 +59,7 @@ export const exercises = {
       reps: '12-15',
       rest: '60秒',
       tips: '手臂微屈，不要耸肩，用肩部发力而非惯性',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411U7XU/',
+      bilibili: 'https://search.bilibili.com/video?keyword=哑铃侧平举',
       youtube: 'https://www.youtube.com/watch?v=3VcKaXpzqRo'
     },
     {
@@ -71,7 +71,7 @@ export const exercises = {
       reps: '10-12',
       rest: '60秒',
       tips: '手臂高举过头，肘部朝向正前方，控制下放速度',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411N7aS/',
+      bilibili: 'https://search.bilibili.com/video?keyword=哑铃过头臂屈伸',
       youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
     }
   ],
@@ -85,7 +85,7 @@ export const exercises = {
       reps: '8-10',
       rest: '90秒',
       tips: '臀部低于肩膀，背部挺直，拉至腹部位置',
-      bilibili: 'https://www.bilibili.com/video/BV1Ux411v7pQ/',
+      bilibili: 'https://search.bilibili.com/video?keyword=T杠划船',
       youtube: 'https://www.youtube.com/watch?v=8P1r-T_X_W0'
     },
     {
@@ -97,7 +97,7 @@ export const exercises = {
       reps: '8-10',
       rest: '90秒',
       tips: '宽握距，下巴过杠顶峰收紧背阔肌，控制下放',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411v7Pq/',
+      bilibili: 'https://search.bilibili.com/video?keyword=助力引体向上',
       youtube: 'https://www.youtube.com/watch?v=eGo4IYlbE5g'
     },
     {
@@ -109,7 +109,7 @@ export const exercises = {
       reps: '10-12',
       rest: '60秒',
       tips: '单手撑在凳上，另一手握哑铃划船，保持背部挺直',
-      bilibili: 'https://www.bilibili.com/video/BV1JW411v7zX/',
+      bilibili: 'https://search.bilibili.com/video?keyword=单臂哑铃划船',
       youtube: 'https://www.youtube.com/watch?v=roddrCDamHs'
     },
     {
@@ -121,7 +121,7 @@ export const exercises = {
       reps: '12-15',
       rest: '60秒',
       tips: '手臂伸直固定，肘部微屈，用背阔肌发力下压',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411N7aS/',
+      bilibili: 'https://search.bilibili.com/video?keyword=直臂下压',
       youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
     },
     {
@@ -133,7 +133,7 @@ export const exercises = {
       reps: '10-12',
       rest: '60秒',
       tips: '大臂垂直固定，不要借力弯举，充分收缩顶峰',
-      bilibili: 'https://www.bilibili.com/video/BV1Ux411v7pQ/',
+      bilibili: 'https://search.bilibili.com/video?keyword=杠铃弯举',
       youtube: 'https://www.youtube.com/watch?v=ykBuc5W1J9w'
     },
     {
@@ -145,7 +145,7 @@ export const exercises = {
       reps: '30米',
       rest: '60秒',
       tips: '挺胸收腹，肩膀向后夹紧，行走时保持身体稳定',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411v7Pq/',
+      bilibili: 'https://search.bilibili.com/video?keyword=农夫行走',
       youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
     }
   ],
@@ -159,7 +159,7 @@ export const exercises = {
       reps: '8-10',
       rest: '120秒',
       tips: '脚距与肩同宽或略宽，蹲至大腿与地面平行，膝盖与脚尖同向',
-      bilibili: 'https://www.bilibili.com/video/BV1Ux411v7pQ/',
+      bilibili: 'https://search.bilibili.com/video?keyword=杠铃深蹲',
       youtube: 'https://www.youtube.com/watch?v=ultWZbUMPL8'
     },
     {
@@ -171,7 +171,7 @@ export const exercises = {
       reps: '10-12',
       rest: '90秒',
       tips: '屈髋向下送，杠铃沿腿下放，保持背部挺直，膝盖微屈',
-      bilibili: 'https://www.bilibili.com/video/BV1JW411v7zX/',
+      bilibili: 'https://search.bilibili.com/video?keyword=罗马尼亚硬拉',
       youtube: 'https://www.youtube.com/watch?v=JCXUYuzwNrM'
     },
     {
@@ -183,7 +183,7 @@ export const exercises = {
       reps: '10-12/侧',
       rest: '60秒',
       tips: '后脚置于凳上，前腿下蹲至大腿与地面平行',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411v7Pq/',
+      bilibili: 'https://search.bilibili.com/video?keyword=保加利亚分腿蹲',
       youtube: 'https://www.youtube.com/watch?v=ot_to5aVXOI'
     },
     {
@@ -195,7 +195,7 @@ export const exercises = {
       reps: '12-15',
       rest: '60秒',
       tips: '腹部贴在垫子上，弯举时大腿后侧充分收缩',
-      bilibili: 'https://www.bilibili.com/video/BV1Qx411N7aS/',
+      bilibili: 'https://search.bilibili.com/video?keyword=腿弯举',
       youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg'
     },
     {
@@ -207,7 +207,7 @@ export const exercises = {
       reps: '12-15',
       rest: '60秒',
       tips: '腿完全伸直时收紧股四头肌，控制下放速度',
-      bilibili: 'https://www.bilibili.com/video/BV1Ux411v7pQ/',
+      bilibili: 'https://search.bilibili.com/video?keyword=腿伸展器械',
       youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg'
     },
     {
@@ -219,7 +219,7 @@ export const exercises = {
       reps: '15-20',
       rest: '45秒',
       tips: '站在垫子上或台阶边缘，充分提踵后缓慢下放',
-      bilibili: 'https://www.bilibili.com/video/BV1JW411v7zX/',
+      bilibili: 'https://search.bilibili.com/video?keyword=站姿提踵',
       youtube: 'https://www.youtube.com/watch?v=gwLzBJYoWlI'
     }
   ]
