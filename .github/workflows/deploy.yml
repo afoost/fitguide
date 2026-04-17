@@ -35,6 +35,14 @@ jobs:
         env:
           NODE_ENV: production
 
+      - name: Inject cache-bust version
+        run: |
+          VERSION=$(date +%s)
+          echo "Injecting version $VERSION into index.html"
+          sed -i "s|\.js\"></script|.js?v=${VERSION}"'></script|g" dist/index.html
+          sed -i "s|\.css\">|.css?v=${VERSION}"'>|g" dist/index.html
+          cat dist/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
