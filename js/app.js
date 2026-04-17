@@ -265,12 +265,12 @@ function showExerciseDetail(day, index) {
       <div class="exercise-videos">
         <h4>视频教学</h4>
         <div class="video-links">
-          <button onclick="window.open('${exercise.bilibili}', '_blank')" class="video-link bilibili">
+          <a href="${exercise.bilibili}" target="_blank" rel="noopener noreferrer" class="video-link bilibili">
             <span class="video-icon">📺</span> B站视频
-          </button>
-          <button onclick="window.open('${exercise.youtube}', '_blank')" class="video-link youtube">
+          </a>
+          <a href="${exercise.youtube}" target="_blank" rel="noopener noreferrer" class="video-link youtube">
             <span class="video-icon">▶️</span> YouTube视频
-          </button>
+          </a>
         </div>
       </div>
     </div>
