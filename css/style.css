@@ -1173,6 +1173,8 @@ body {
   font-size: 0.85rem;
   font-weight: 600;
   transition: var(--transition);
+  border: none;
+  cursor: pointer;
 }
 
 .video-link.bilibili {
