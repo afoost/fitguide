@@ -1,7 +1,7 @@
 // FitGuide - Main Application
 import { exercises, dietData, bodyTypeDescriptions, personalizedReasons } from './data.js';
-import { 
-  calculateBMI, getBMICategory, determineBodyType, 
+import {
+  calculateBMI, getBMICategory, determineBodyType,
   calculateProtein, calculateTDEE, getCurrentTrainingDay,
   getDayLabel, saveToStorage, loadFromStorage, formatDate
 } from './utils.js';
@@ -44,14 +44,14 @@ function bindEvents() {
 
 function handleClick(e) {
   const target = e.target;
-  
+
   // Tab navigation
   if (target.dataset.tab) {
     state.currentTab = target.dataset.tab;
     render();
     return;
   }
-  
+
   // Tab buttons
   if (target.closest('.tab-btn')) {
     const tab = target.closest('.tab-btn').dataset.tab;
@@ -59,39 +59,40 @@ function handleClick(e) {
     render();
     return;
   }
-  
+
   // Generate plan
   if (target.dataset.action === 'generate') {
     generatePlan();
     return;
   }
-  
-  // View exercise detail
-  if (target.dataset.action === 'view-exercise') {
-    const day = target.dataset.day;
-    const index = parseInt(target.dataset.index);
+
+  // View exercise detail (use closest to handle clicks on child elements inside card)
+  const exerciseCard = target.closest('[data-action="view-exercise"]');
+  if (exerciseCard) {
+    const day = exerciseCard.dataset.day;
+    const index = parseInt(exerciseCard.dataset.index);
     showExerciseDetail(day, index);
     return;
   }
-  
-  // Close modal
-  if (target.dataset.action === 'close-modal' || target.classList.contains('modal-overlay')) {
+
+  // Close modal (click on overlay background or close button)
+  if (target.dataset.action === 'close-modal' || target.closest('.modal-overlay') && !target.closest('.modal-content')) {
     closeModal();
     return;
   }
-  
+
   // Record weight
   if (target.dataset.action === 'record-weight') {
     recordWeight();
     return;
   }
-  
+
   // Update body type in profile tab
   if (target.dataset.action === 'update-body-type') {
     updateBodyType();
     return;
   }
-  
+
   // Update goal
   if (target.dataset.action === 'update-goal') {
     const newGoal = target.dataset.goal;
@@ -107,7 +108,7 @@ function handleClick(e) {
     render();
     return;
   }
-  
+
   // Switch training day
   if (target.dataset.action === 'switch-day') {
     const day = target.dataset.day;
@@ -122,7 +123,7 @@ function handleChange(e) {
 
 function handleSubmit(e) {
   e.preventDefault();
-  
+
   if (e.target.id === 'profile-form') {
     saveProfile(e);
   }
@@ -131,7 +132,7 @@ function handleSubmit(e) {
 function generatePlan() {
   const form = document.getElementById('profile-form');
   const formData = new FormData(form);
-  
+
   const profile = {
     gender: formData.get('gender'),
     age: parseInt(formData.get('age')),
@@ -142,30 +143,30 @@ function generatePlan() {
     metabolism: formData.get('metabolism'),
     activityLevel: formData.get('activityLevel')
   };
-  
+
   // Validate
   if (!profile.gender || !profile.age || !profile.height || !profile.weight) {
     showToast('请填写所有必填项');
     return;
   }
-  
+
   if (!profile.bodyFrame || !profile.fatDistribution || !profile.metabolism) {
     showToast('请选择体型特征');
     return;
   }
-  
+
   state.profile = profile;
   state.currentBodyType = determineBodyType(profile);
   state.hasGenerated = true;
-  
+
   if (!state.trainingStartDate) {
     state.trainingStartDate = new Date().toISOString();
     saveToStorage('trainingStartDate', state.trainingStartDate);
   }
-  
+
   saveToStorage('profile', profile);
   saveToStorage('currentBodyType', state.currentBodyType);
-  
+
   // Record initial weight
   const today = formatDate(new Date());
   const existingIndex = state.weightRecords.findIndex(r => r.date === today);
@@ -173,9 +174,9 @@ function generatePlan() {
     state.weightRecords.push({ date: today, weight: profile.weight });
     saveToStorage('weightRecords', state.weightRecords);
   }
-  
+
   render();
-  showToast(`体型判断：${dietData[state.currentBodyType].label}，方案已生成！`);
+  showToast(`体型判断:${dietData[state.currentBodyType].label},方案已生成!`);
 }
 
 function saveProfile(e) {
@@ -185,40 +186,40 @@ function saveProfile(e) {
 function recordWeight() {
   const weightInput = document.getElementById('weight-input');
   const weight = parseFloat(weightInput.value);
-  
+
   if (!weight || weight <= 0) {
     showToast('请输入有效体重');
     return;
   }
-  
+
   const today = formatDate(new Date());
   const existingIndex = state.weightRecords.findIndex(r => r.date === today);
-  
+
   if (existingIndex >= 0) {
     state.weightRecords[existingIndex].weight = weight;
   } else {
     state.weightRecords.push({ date: today, weight: weight });
   }
-  
+
   state.weightRecords.sort((a, b) => new Date(a.date) - new Date(b.date));
   saveToStorage('weightRecords', state.weightRecords);
   weightInput.value = '';
-  
+
   render();
-  showToast('体重已记录！');
+  showToast('体重已记录!');
 }
 
 function updateBodyType() {
   const select = document.getElementById('body-type-select');
   const newType = select.value;
-  
+
   if (newType && state.profile) {
     state.currentBodyType = newType;
     state.profile.bodyType = newType;
     saveToStorage('currentBodyType', newType);
     saveToStorage('profile', state.profile);
     render();
-    showToast(`体型已更新为：${dietData[newType].label}`);
+    showToast(`体型已更新为:${dietData[newType].label}`);
   }
 }
 
@@ -227,14 +228,14 @@ function showTrainingDay(day) {
   const dayIndex = days.indexOf(day);
   const trainingDay = getCurrentTrainingDay(state.trainingStartDate);
   const isActive = dayIndex === trainingDay;
-  
+
   renderTrainingTab(day, isActive);
 }
 
 function showExerciseDetail(day, index) {
   const exercise = exercises[day][index];
   if (!exercise) return;
-  
+
   const modalContent = `
     <div class="modal-content exercise-detail">
       <button class="modal-close" data-action="close-modal">&times;</button>
@@ -245,9 +246,9 @@ function showExerciseDetail(day, index) {
         <span class="badge badge-${exercise.level === '初级' ? 'primary' : exercise.level === '中级' ? 'success' : 'warning'}">${exercise.level}</span>
       </div>
       <div class="exercise-sets">
-        <div class="set-item"><strong>组数：</strong>${exercise.sets}组</div>
-        <div class="set-item"><strong>次数：</strong>${exercise.reps}次</div>
-        <div class="set-item"><strong>休息：</strong>${exercise.rest}</div>
+        <div class="set-item"><strong>组数:</strong>${exercise.sets}组</div>
+        <div class="set-item"><strong>次数:</strong>${exercise.reps}次</div>
+        <div class="set-item"><strong>休息:</strong>${exercise.rest}</div>
       </div>
       <div class="exercise-tips">
         <h4>动作要点</h4>
@@ -266,7 +267,7 @@ function showExerciseDetail(day, index) {
       </div>
     </div>
   `;
-  
+
   showModal(modalContent);
 }
 
@@ -293,12 +294,12 @@ function closeModal() {
 function showToast(message) {
   const existing = document.querySelector('.toast');
   if (existing) existing.remove();
-  
+
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.textContent = message;
   document.body.appendChild(toast);
-  
+
   setTimeout(() => toast.classList.add('show'), 10);
   setTimeout(() => {
     toast.classList.remove('show');
@@ -310,13 +311,13 @@ function showToast(message) {
 function render() {
   const tabs = ['home', 'training', 'diet', 'profile'];
   const tabNames = { home: '首页', training: '训练', diet: '饮食', profile: '我的' };
-  
+
   app.innerHTML = `
     <header class="app-header">
       <h1>💪 FitGuide</h1>
       <p class="tagline">你的专属健身助手</p>
     </header>
-    
+
     <nav class="tab-nav">
       ${tabs.map(tab => `
         <button class="tab-btn ${state.currentTab === tab ? 'active' : ''}" data-tab="${tab}">
@@ -325,12 +326,12 @@ function render() {
         </button>
       `).join('')}
     </nav>
-    
+
     <main class="tab-content">
       ${renderCurrentTab()}
     </main>
   `;
-  
+
   // Post-render for charts
   if (state.currentTab === 'profile' && state.weightRecords.length > 0) {
     setTimeout(() => renderWeightChart(), 100);
@@ -362,28 +363,28 @@ function renderHomeTab() {
     const bmi = calculateBMI(state.profile.height, state.profile.weight);
     const bmiCategory = getBMICategory(bmi);
     const bodyTypeInfo = dietData[state.currentBodyType];
-    
+
     return `
       <div class="home-result">
         <div class="result-header">
-          <h2>欢迎回来！</h2>
+          <h2>欢迎回来!</h2>
           <p>你的健身方案已准备就绪</p>
         </div>
-        
+
         <div class="result-cards">
           <div class="result-card bmi-card">
             <h3>BMI 指数</h3>
             <div class="bmi-value" style="color: ${bmiCategory.color}">${bmi.toFixed(1)}</div>
             <div class="bmi-label" style="color: ${bmiCategory.color}">${bmiCategory.label}</div>
           </div>
-          
+
           <div class="result-card body-type-card">
             <h3>体型类型</h3>
             <div class="body-type-value" style="color: ${bodyTypeInfo.color}">${bodyTypeInfo.label}</div>
             <div class="body-type-desc">${getBodyTypeShortDesc(state.currentBodyType)}</div>
           </div>
         </div>
-        
+
         <div class="quick-actions">
           <button class="action-btn primary" data-tab="training">
             <span>🏋️</span> 开始训练
@@ -392,7 +393,7 @@ function renderHomeTab() {
             <span>🥗</span> 查看饮食
           </button>
         </div>
-        
+
         <div class="plan-summary">
           <h3>📋 训练计划概览</h3>
           <div class="plan-days">
@@ -419,25 +420,25 @@ function renderHomeTab() {
       </div>
     `;
   }
-  
+
   return renderProfileForm();
 }
 
 function getBodyTypeShortDesc(type) {
   const descriptions = {
-    endomorph: '容易存储脂肪，需控制碳水',
-    mesomorph: '肌肉易增长，均衡饮食',
-    ectomorph: '代谢快，需高碳水少食多餐'
+    endomorph: '容易存储脂肪,需控制碳水',
+    mesomorph: '肌肉易增长,均衡饮食',
+    ectomorph: '代谢快,需高碳水少食多餐'
   };
   return descriptions[type] || '';
 }
 
 function renderPersonalizedExplanation() {
   if (!state.currentBodyType || !personalizedReasons[state.currentBodyType]) return '';
-  
+
   const exp = personalizedReasons[state.currentBodyType];
   const isExpanded = state.explanationExpanded;
-  
+
   const sectionsHTML = exp.sections.map(sec => `
     <div class="exp-section">
       <div class="exp-heading">
@@ -449,7 +450,7 @@ function renderPersonalizedExplanation() {
         ${sec.content.split('\n\n').map(p => `<p>${p}</p>`).join('')}
         ${sec.pathways && sec.pathways.length ? `
           <div class="exp-pathways">
-            <strong>🧪 信号通路：</strong>
+            <strong>🧪 信号通路:</strong>
             <ul>
               ${sec.pathways.map(path => `<li>${path}</li>`).join('')}
             </ul>
@@ -458,18 +459,18 @@ function renderPersonalizedExplanation() {
       </div>
     </div>
   `).join('');
-  
+
   return `
     <div class="explanation-panel">
       <button class="exp-toggle-btn" data-action="toggle-explanation">
         <span class="exp-title">🧬 ${exp.title}</span>
         <span class="exp-arrow ${isExpanded ? 'expanded' : ''}">▼</span>
       </button>
-      
+
       <div class="exp-summary">
         <p>${exp.summary}</p>
       </div>
-      
+
       <div class="exp-content ${isExpanded ? 'show' : 'hide'}">
         ${sectionsHTML}
       </div>
@@ -482,13 +483,13 @@ function renderProfileForm() {
     <div class="profile-form-container">
       <div class="form-header">
         <h2>创建你的健身方案</h2>
-        <p>填写基本信息，获取专属训练和饮食计划</p>
+        <p>填写基本信息,获取专属训练和饮食计划</p>
       </div>
-      
+
       <form id="profile-form" class="profile-form">
         <div class="form-section">
           <h3>基本信息</h3>
-          
+
           <div class="form-group">
             <label>性别 *</label>
             <div class="radio-group">
@@ -502,7 +503,7 @@ function renderProfileForm() {
               </label>
             </div>
           </div>
-          
+
           <div class="form-row">
             <div class="form-group">
               <label for="age">年龄 *</label>
@@ -518,11 +519,11 @@ function renderProfileForm() {
             </div>
           </div>
         </div>
-        
+
         <div class="form-section">
           <h3>体型特征</h3>
-          <p class="form-hint">根据你的身体特征选择，帮助我们判断你的体型类型</p>
-          
+          <p class="form-hint">根据你的身体特征选择,帮助我们判断你的体型类型</p>
+
           <div class="form-group">
             <label>骨架大小 *</label>
             <div class="radio-group three">
@@ -540,7 +541,7 @@ function renderProfileForm() {
               </label>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label>脂肪分布 *</label>
             <div class="radio-group three">
@@ -558,7 +559,7 @@ function renderProfileForm() {
               </label>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label>代谢速度 *</label>
             <div class="radio-group three">
@@ -577,21 +578,21 @@ function renderProfileForm() {
             </div>
           </div>
         </div>
-        
+
         <div class="form-section">
           <h3>活动水平</h3>
           <div class="form-group">
             <label for="activityLevel">每周运动频率</label>
             <select id="activityLevel" name="activityLevel">
-              <option value="sedentary">久坐（几乎不运动）</option>
-              <option value="light" selected>轻度（每周1-2次）</option>
-              <option value="moderate">中度（每周3-4次）</option>
-              <option value="active">活跃（每周5-6次）</option>
-              <option value="veryActive">极度活跃（每天运动）</option>
+              <option value="sedentary">久坐(几乎不运动)</option>
+              <option value="light" selected>轻度(每周1-2次)</option>
+              <option value="moderate">中度(每周3-4次)</option>
+              <option value="active">活跃(每周5-6次)</option>
+              <option value="veryActive">极度活跃(每天运动)</option>
             </select>
           </div>
         </div>
-        
+
         <button type="submit" class="btn-primary generate-btn" data-action="generate">
           🚀 生成专属方案
         </button>
@@ -605,22 +606,22 @@ function renderTrainingTab(activeDay) {
   const dayLabels = { push: 'Push Day', pull: 'Pull Day', legs: 'Legs Day' };
   const dayIcons = { push: '推', pull: '拉', legs: '腿' };
   const dayColors = { push: '#e74c3c', pull: '#3498db', legs: '#2ecc71' };
-  
+
   const trainingDay = state.trainingStartDate ? getCurrentTrainingDay(state.trainingStartDate) : 0;
-  
+
   if (!activeDay) {
     activeDay = days[trainingDay];
   }
-  
+
   const currentExercises = exercises[activeDay] || exercises.push;
-  
+
   return `
     <div class="training-tab">
       <div class="training-header">
         <h2>🏋️ 训练计划</h2>
         <p>每周3次 Push → Pull → Legs → 休息 循环</p>
       </div>
-      
+
       <div class="day-selector">
         ${days.map((day, index) => `
           <button class="day-btn ${activeDay === day ? 'active' : ''} ${index === trainingDay && !activeDay ? 'current' : ''}"
@@ -631,7 +632,7 @@ function renderTrainingTab(activeDay) {
           </button>
         `).join('')}
       </div>
-      
+
       <div class="exercises-list" style="--day-color: ${dayColors[activeDay]}">
         <h3 class="day-title">${dayLabels[activeDay]}</h3>
         ${currentExercises.map((ex, index) => `
@@ -652,14 +653,14 @@ function renderTrainingTab(activeDay) {
           </div>
         `).join('')}
       </div>
-      
+
       <div class="training-notes">
         <h4>📝 训练提示</h4>
         <ul>
-          <li>热身：训练前5-10分钟有氧 + 动态拉伸</li>
-          <li>组间休息：严格按照计划时间</li>
-          <li>收尾：训练后拉伸放松</li>
-          <li>HIIT可选：每周可添加1-2次20分钟HIIT</li>
+          <li>热身:训练前5-10分钟有氧 + 动态拉伸</li>
+          <li>组间休息:严格按照计划时间</li>
+          <li>收尾:训练后拉伸放松</li>
+          <li>HIIT可选:每周可添加1-2次20分钟HIIT</li>
         </ul>
       </div>
     </div>
@@ -669,24 +670,24 @@ function renderTrainingTab(activeDay) {
 function renderDietTab() {
   const bodyType = state.currentBodyType || 'mesomorph';
   const diet = dietData[bodyType];
-  
+
   return `
     <div class="diet-tab">
       <div class="diet-header" style="--type-color: ${diet.color}">
         <h2>🥗 饮食计划</h2>
         <p>根据你的${diet.label}体质定制</p>
       </div>
-      
+
       <div class="diet-type-selector">
         ${Object.entries(dietData).map(([key, value]) => `
-          <button class="type-btn ${bodyType === key ? 'active' : ''}" 
+          <button class="type-btn ${bodyType === key ? 'active' : ''}"
                   onclick="switchDietType('${key}')"
                   style="--type-color: ${value.color}">
             ${value.label}
           </button>
         `).join('')}
       </div>
-      
+
       <div class="diet-content" id="diet-content">
         <div class="principles-section">
           <h3>📌 饮食原则</h3>
@@ -694,10 +695,10 @@ function renderDietTab() {
             ${diet.principles.map(p => `<li>${p}</li>`).join('')}
           </ul>
         </div>
-        
+
         <div class="meals-section">
           <h3>🍽️ 三餐示例</h3>
-          
+
           <div class="meal-card">
             <div class="meal-header">
               <span class="meal-icon">🌅</span>
@@ -705,7 +706,7 @@ function renderDietTab() {
             </div>
             <div class="meal-content">${diet.meals.breakfast}</div>
           </div>
-          
+
           <div class="meal-card">
             <div class="meal-header">
               <span class="meal-icon">☀️</span>
@@ -713,7 +714,7 @@ function renderDietTab() {
             </div>
             <div class="meal-content">${diet.meals.lunch}</div>
           </div>
-          
+
           <div class="meal-card">
             <div class="meal-header">
               <span class="meal-icon">🌙</span>
@@ -721,7 +722,7 @@ function renderDietTab() {
             </div>
             <div class="meal-content">${diet.meals.dinner}</div>
           </div>
-          
+
           <div class="meal-card snacks">
             <div class="meal-header">
               <span class="meal-icon">🍎</span>
@@ -732,7 +733,7 @@ function renderDietTab() {
             </div>
           </div>
         </div>
-        
+
         ${state.profile ? `
           <div class="nutrition-summary">
             <h3>📊 每日营养参考</h3>
@@ -756,13 +757,13 @@ function renderDietTab() {
 function renderProfileTab() {
   const bodyType = state.currentBodyType || 'mesomorph';
   const bodyTypeInfo = dietData[bodyType];
-  
+
   return `
     <div class="profile-tab">
       <div class="profile-header">
         <h2>👤 我的</h2>
       </div>
-      
+
       ${state.profile ? `
         <div class="profile-stats">
           <div class="stat-card">
@@ -774,25 +775,25 @@ function renderProfileTab() {
             <div class="stat-label">体型类型</div>
           </div>
         </div>
-        
+
         <div class="goal-selector">
           <h3>选择目标</h3>
           <div class="goal-buttons">
-            <button class="goal-btn ${state.goal === 'lose' ? 'active' : ''}" 
+            <button class="goal-btn ${state.goal === 'lose' ? 'active' : ''}"
                     data-action="update-goal" data-goal="lose">
               📉 减脂
             </button>
-            <button class="goal-btn ${state.goal === 'maintain' ? 'active' : ''}" 
+            <button class="goal-btn ${state.goal === 'maintain' ? 'active' : ''}"
                     data-action="update-goal" data-goal="maintain">
               ⚖️ 维持
             </button>
-            <button class="goal-btn ${state.goal === 'gain' ? 'active' : ''}" 
+            <button class="goal-btn ${state.goal === 'gain' ? 'active' : ''}"
                     data-action="update-goal" data-goal="gain">
               📈 增肌
             </button>
           </div>
         </div>
-        
+
         <div class="body-type-selector">
           <h3>调整体型</h3>
           <select id="body-type-select" class="body-type-select">
@@ -802,14 +803,14 @@ function renderProfileTab() {
           </select>
           <button class="btn-secondary" data-action="update-body-type">更新体型</button>
         </div>
-        
+
         <div class="weight-record">
           <h3>📈 体重记录</h3>
           <div class="weight-input-group">
             <input type="number" id="weight-input" placeholder="输入今日体重(kg)" step="0.1" min="30" max="200">
             <button class="btn-record" data-action="record-weight">记录</button>
           </div>
-          
+
           ${state.weightRecords.length > 0 ? `
             <div class="weight-chart-container">
               <canvas id="weightChart"></canvas>
@@ -825,7 +826,7 @@ function renderProfileTab() {
                 `).join('')}
               </div>
             </div>
-          ` : '<p class="no-records">还没有体重记录，开始记录吧！</p>'}
+          ` : '<p class="no-records">还没有体重记录,开始记录吧!</p>'}
         </div>
       ` : `
         <div class="no-profile">
@@ -840,25 +841,25 @@ function renderProfileTab() {
 function renderWeightChart() {
   const canvas = document.getElementById('weightChart');
   if (!canvas || state.weightRecords.length === 0) return;
-  
+
   const ctx = canvas.getContext('2d');
   const records = state.weightRecords.slice(-14);
-  
+
   canvas.width = canvas.parentElement.clientWidth || 320;
   canvas.height = 200;
-  
+
   const padding = 40;
   const chartWidth = canvas.width - padding * 2;
   const chartHeight = canvas.height - padding * 2;
-  
+
   const weights = records.map(r => r.weight);
   const minWeight = Math.min(...weights) - 2;
   const maxWeight = Math.max(...weights) + 2;
   const weightRange = maxWeight - minWeight || 1;
-  
+
   // Clear canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
+
   // Draw grid
   ctx.strokeStyle = '#eee';
   ctx.lineWidth = 1;
@@ -868,7 +869,7 @@ function renderWeightChart() {
     ctx.moveTo(padding, y);
     ctx.lineTo(canvas.width - padding, y);
     ctx.stroke();
-    
+
     // Y-axis labels
     const weightLabel = (maxWeight - (weightRange / 4) * i).toFixed(1);
     ctx.fillStyle = '#999';
@@ -876,16 +877,16 @@ function renderWeightChart() {
     ctx.textAlign = 'right';
     ctx.fillText(weightLabel, padding - 5, y + 3);
   }
-  
+
   // Draw line
   ctx.strokeStyle = '#4ECDC4';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  
+
   records.forEach((record, i) => {
     const x = padding + (chartWidth / (records.length - 1 || 1)) * i;
     const y = padding + chartHeight - ((record.weight - minWeight) / weightRange) * chartHeight;
-    
+
     if (i === 0) {
       ctx.moveTo(x, y);
     } else {
@@ -893,13 +894,13 @@ function renderWeightChart() {
     }
   });
   ctx.stroke();
-  
+
   // Draw points
   ctx.fillStyle = '#4ECDC4';
   records.forEach((record, i) => {
     const x = padding + (chartWidth / (records.length - 1 || 1)) * i;
     const y = padding + chartHeight - ((record.weight - minWeight) / weightRange) * chartHeight;
-    
+
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2);
     ctx.fill();
@@ -922,10 +923,10 @@ function renderDietContent(type) {
         ${diet.principles.map(p => `<li>${p}</li>`).join('')}
       </ul>
     </div>
-    
+
     <div class="meals-section">
       <h3>🍽️ 三餐示例</h3>
-      
+
       <div class="meal-card">
         <div class="meal-header">
           <span class="meal-icon">🌅</span>
@@ -933,7 +934,7 @@ function renderDietContent(type) {
         </div>
         <div class="meal-content">${diet.meals.breakfast}</div>
       </div>
-      
+
       <div class="meal-card">
         <div class="meal-header">
           <span class="meal-icon">☀️</span>
@@ -941,7 +942,7 @@ function renderDietContent(type) {
         </div>
         <div class="meal-content">${diet.meals.lunch}</div>
       </div>
-      
+
       <div class="meal-card">
         <div class="meal-header">
           <span class="meal-icon">🌙</span>
@@ -949,7 +950,7 @@ function renderDietContent(type) {
         </div>
         <div class="meal-content">${diet.meals.dinner}</div>
       </div>
-      
+
       <div class="meal-card snacks">
         <div class="meal-header">
           <span class="meal-icon">🍎</span>
