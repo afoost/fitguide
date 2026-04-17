@@ -1,228 +1,90 @@
 // FitGuide - Exercise & Diet Data
 
 export const exercises = {
-  push: [
-    {
-      name: '实力举',
-      muscle: '肩部',
-      equipment: '杠铃',
-      level: '中级',
-      sets: 4,
-      reps: '8-10',
-      rest: '90秒',
-      tips: '核心收紧，目视前方，推举时手臂不要完全锁死',
-      bilibili: 'https://search.bilibili.com/video?keyword=杠铃实力举',
-      youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
-    },
-    {
-      name: '卧推',
-      muscle: '胸部',
-      equipment: '杠铃',
-      level: '中级',
-      sets: 4,
-      reps: '8-12',
-      rest: '90秒',
-      tips: '握距略宽于肩，推到顶峰时胸肌收紧，下放时控制速度',
-      bilibili: 'https://search.bilibili.com/video?keyword=杠铃卧推',
-      youtube: 'https://www.youtube.com/watch?v=rT7DgCr-3pg'
-    },
-    {
-      name: '哑铃斜推',
-      muscle: '上胸',
-      equipment: '哑铃',
-      level: '初级',
-      sets: 3,
-      reps: '10-12',
-      rest: '60秒',
-      tips: '躺椅倾斜30-45度，哑铃置于胸部两侧，向上推起',
-      bilibili: 'https://search.bilibili.com/video?keyword=哑铃上斜卧推',
-      youtube: 'https://www.youtube.com/watch?v=DbFgADa2PL8'
-    },
-    {
-      name: '绳索面拉',
-      muscle: '后束',
-      equipment: '绳索',
-      level: '初级',
-      sets: 3,
-      reps: '12-15',
-      rest: '60秒',
-      tips: '拉力器调至面部高度，双手握绳向外拉开，保持肩胛骨夹紧',
-      bilibili: 'https://search.bilibili.com/video?keyword=绳索面拉',
-      youtube: 'https://www.youtube.com/watch?v=rep-Q5COmSU'
-    },
-    {
-      name: '侧平举',
-      muscle: '中束',
-      equipment: '哑铃',
-      level: '初级',
-      sets: 3,
-      reps: '12-15',
-      rest: '60秒',
-      tips: '手臂微屈，不要耸肩，用肩部发力而非惯性',
-      bilibili: 'https://search.bilibili.com/video?keyword=哑铃侧平举',
-      youtube: 'https://www.youtube.com/watch?v=3VcKaXpzqRo'
-    },
-    {
-      name: '过头臂屈伸',
-      muscle: '三头肌',
-      equipment: '哑铃/绳索',
-      level: '初级',
-      sets: 3,
-      reps: '10-12',
-      rest: '60秒',
-      tips: '手臂高举过头，肘部朝向正前方，控制下放速度',
-      bilibili: 'https://search.bilibili.com/video?keyword=哑铃过头臂屈伸',
-      youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
-    }
-  ],
-  pull: [
-    {
-      name: 'T杠划船',
-      muscle: '背部',
-      equipment: 'T杠架',
-      level: '中级',
-      sets: 4,
-      reps: '8-10',
-      rest: '90秒',
-      tips: '臀部低于肩膀，背部挺直，拉至腹部位置',
-      bilibili: 'https://search.bilibili.com/video?keyword=T杠划船',
-      youtube: 'https://www.youtube.com/watch?v=8P1r-T_X_W0'
-    },
-    {
-      name: '助力引体',
-      muscle: '背阔肌',
-      equipment: '引体架',
-      level: '初级',
-      sets: 3,
-      reps: '8-10',
-      rest: '90秒',
-      tips: '宽握距，下巴过杠顶峰收紧背阔肌，控制下放',
-      bilibili: 'https://search.bilibili.com/video?keyword=助力引体向上',
-      youtube: 'https://www.youtube.com/watch?v=eGo4IYlbE5g'
-    },
-    {
-      name: '单臂哑铃划船',
-      muscle: '背阔肌/菱形肌',
-      equipment: '哑铃',
-      level: '初级',
-      sets: 3,
-      reps: '10-12',
-      rest: '60秒',
-      tips: '单手撑在凳上，另一手握哑铃划船，保持背部挺直',
-      bilibili: 'https://search.bilibili.com/video?keyword=单臂哑铃划船',
-      youtube: 'https://www.youtube.com/watch?v=roddrCDamHs'
-    },
-    {
-      name: '直臂下压',
-      muscle: '下背阔',
-      equipment: '绳索',
-      level: '初级',
-      sets: 3,
-      reps: '12-15',
-      rest: '60秒',
-      tips: '手臂伸直固定，肘部微屈，用背阔肌发力下压',
-      bilibili: 'https://search.bilibili.com/video?keyword=直臂下压',
-      youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
-    },
-    {
-      name: '二头弯举',
-      muscle: '肱二头肌',
-      equipment: '杠铃/哑铃',
-      level: '初级',
-      sets: 3,
-      reps: '10-12',
-      rest: '60秒',
-      tips: '大臂垂直固定，不要借力弯举，充分收缩顶峰',
-      bilibili: 'https://search.bilibili.com/video?keyword=杠铃弯举',
-      youtube: 'https://www.youtube.com/watch?v=ykBuc5W1J9w'
-    },
-    {
-      name: '农夫行走',
-      muscle: '核心/前臂',
-      equipment: '哑铃/壶铃',
-      level: '初级',
-      sets: 3,
-      reps: '30米',
-      rest: '60秒',
-      tips: '挺胸收腹，肩膀向后夹紧，行走时保持身体稳定',
-      bilibili: 'https://search.bilibili.com/video?keyword=农夫行走',
-      youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0'
-    }
-  ],
-  legs: [
-    {
-      name: '深蹲',
-      muscle: '股四头肌/臀肌',
-      equipment: '杠铃',
-      level: '中级',
-      sets: 4,
-      reps: '8-10',
-      rest: '120秒',
-      tips: '脚距与肩同宽或略宽，蹲至大腿与地面平行，膝盖与脚尖同向',
-      bilibili: 'https://search.bilibili.com/video?keyword=杠铃深蹲',
-      youtube: 'https://www.youtube.com/watch?v=ultWZbUMPL8'
-    },
-    {
-      name: '罗马尼亚硬拉',
-      muscle: '腘绳肌/臀肌',
-      equipment: '杠铃',
-      level: '中级',
-      sets: 4,
-      reps: '10-12',
-      rest: '90秒',
-      tips: '屈髋向下送，杠铃沿腿下放，保持背部挺直，膝盖微屈',
-      bilibili: 'https://search.bilibili.com/video?keyword=罗马尼亚硬拉',
-      youtube: 'https://www.youtube.com/watch?v=JCXUYuzwNrM'
-    },
-    {
-      name: '保加利亚分腿蹲',
-      muscle: '股四头肌/臀肌',
-      equipment: '哑铃/自重',
-      level: '中级',
-      sets: 3,
-      reps: '10-12/侧',
-      rest: '60秒',
-      tips: '后脚置于凳上，前腿下蹲至大腿与地面平行',
-      bilibili: 'https://search.bilibili.com/video?keyword=保加利亚分腿蹲',
-      youtube: 'https://www.youtube.com/watch?v=ot_to5aVXOI'
-    },
-    {
-      name: '腿弯举',
-      muscle: '腘绳肌',
-      equipment: '腿弯举机',
-      level: '初级',
-      sets: 3,
-      reps: '12-15',
-      rest: '60秒',
-      tips: '腹部贴在垫子上，弯举时大腿后侧充分收缩',
-      bilibili: 'https://search.bilibili.com/video?keyword=腿弯举',
-      youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg'
-    },
-    {
-      name: '腿伸展',
-      muscle: '股四头肌',
-      equipment: '腿伸展机',
-      level: '初级',
-      sets: 3,
-      reps: '12-15',
-      rest: '60秒',
-      tips: '腿完全伸直时收紧股四头肌，控制下放速度',
-      bilibili: 'https://search.bilibili.com/video?keyword=腿伸展器械',
-      youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg'
-    },
-    {
-      name: '提踵',
-      muscle: '小腿',
-      equipment: '器械/自重',
-      level: '初级',
-      sets: 4,
-      reps: '15-20',
-      rest: '45秒',
-      tips: '站在垫子上或台阶边缘，充分提踵后缓慢下放',
-      bilibili: 'https://search.bilibili.com/video?keyword=站姿提踵',
-      youtube: 'https://www.youtube.com/watch?v=gwLzBJYoWlI'
-    }
-  ]
+  endomorph: {
+    label: '内胚型',
+    push: [
+      // 高容量: 4-5组, 8-15次, 休息偏短促代谢压力
+      { name: '实力举', muscle: '肩部', equipment: '杠铃', level: '中级', sets: 4, reps: '10-12', rest: '60秒', tips: '核心收紧，肩部发力，推举时手臂不要完全锁死', bilibili: '...', youtube: '...' },
+      { name: '卧推', muscle: '胸部', equipment: '杠铃', level: '中级', sets: 4, reps: '10-12', rest: '60秒', tips: '握距略宽于肩，顶峰收紧胸肌，控制下放速度', bilibili: '...', youtube: '...' },
+      { name: '哑铃斜推', muscle: '上胸', equipment: '哑铃', level: '初级', sets: 3, reps: '12-15', rest: '45秒', tips: '躺椅倾斜30-45度，哑铃置于胸部两侧', bilibili: '...', youtube: '...' },
+      { name: '绳索面拉', muscle: '后束', equipment: '绳索', level: '初级', sets: 3, reps: '15-20', rest: '45秒', tips: '拉力器调至面部高度，肩胛骨夹紧', bilibili: '...', youtube: '...' },
+      { name: '侧平举', muscle: '中束', equipment: '哑铃', level: '初级', sets: 4, reps: '12-15', rest: '45秒', tips: '手臂微屈不耸肩，用肩部发力', bilibili: '...', youtube: '...' },
+      { name: '过头臂屈伸', muscle: '三头肌', equipment: '哑铃', level: '初级', sets: 3, reps: '12-15', rest: '45秒', tips: '手臂高举过头，肘部朝前，控制下放', bilibili: '...', youtube: '...' }
+    ],
+    pull: [
+      { name: 'T杠划船', muscle: '背部', equipment: 'T杠架', level: '中级', sets: 4, reps: '10-12', rest: '60秒', tips: '臀部低于肩膀，背部挺直，拉至腹部', bilibili: '...', youtube: '...' },
+      { name: '助力引体', muscle: '背阔肌', equipment: '引体架', level: '初级', sets: 3, reps: '8-10', rest: '60秒', tips: '宽握距，下巴过杠顶峰收紧背阔肌', bilibili: '...', youtube: '...' },
+      { name: '单臂哑铃划船', muscle: '背阔肌/菱形肌', equipment: '哑铃', level: '初级', sets: 3, reps: '12-15', rest: '45秒', tips: '单手撑凳，另一手划船，背部挺直', bilibili: '...', youtube: '...' },
+      { name: '直臂下压', muscle: '下背阔', equipment: '绳索', level: '初级', sets: 3, reps: '15-20', rest: '45秒', tips: '手臂伸直，肘部微屈，背阔肌发力下压', bilibili: '...', youtube: '...' },
+      { name: '二头弯举', muscle: '肱二头肌', equipment: '杠铃', level: '初级', sets: 3, reps: '12-15', rest: '45秒', tips: '大臂垂直固定，充分收缩顶峰', bilibili: '...', youtube: '...' },
+      { name: '卷腹', muscle: '腹部', equipment: '自重', level: '初级', sets: 3, reps: '15-20', rest: '30秒', tips: '平躺卷腹，腹部发力卷起，缓慢下放', bilibili: '...', youtube: '...' }
+    ],
+    legs: [
+      { name: '深蹲', muscle: '股四头肌/臀肌', equipment: '杠铃', level: '中级', sets: 5, reps: '12-15', rest: '60秒', tips: '脚距与肩同宽，蹲至大腿与地面平行', bilibili: '...', youtube: '...' },
+      { name: '罗马尼亚硬拉', muscle: '腘绳肌/臀肌', equipment: '杠铃', level: '中级', sets: 4, reps: '12-15', rest: '60秒', tips: '屈髋向下送，杠铃沿腿下放，背部挺直', bilibili: '...', youtube: '...' },
+      { name: '腿弯举', muscle: '腘绳肌', equipment: '腿弯举机', level: '初级', sets: 4, reps: '12-15', rest: '45秒', tips: '腹部贴垫，弯举时大腿后侧充分收缩', bilibili: '...', youtube: '...' },
+      { name: '腿伸展', muscle: '股四头肌', equipment: '腿伸展机', level: '初级', sets: 3, reps: '15-20', rest: '45秒', tips: '腿完全伸直时收紧股四头肌', bilibili: '...', youtube: '...' },
+      { name: '提踵', muscle: '小腿', equipment: '器械', level: '初级', sets: 4, reps: '15-20', rest: '45秒', tips: '站在垫子上，充分提踵后缓慢下放', bilibili: '...', youtube: '...' },
+      { name: '卷腹', muscle: '腹部', equipment: '自重', level: '初级', sets: 3, reps: '20', rest: '30秒', tips: '仰卧卷腹，腹部发力上卷', bilibili: '...', youtube: '...' }
+    ]
+  },
+  mesomorph: {
+    label: '中胚型',
+    push: [
+      // 标准肌肥大: 3-4组, 8-12次
+      { name: '实力举', muscle: '肩部', equipment: '杠铃', level: '中级', sets: 4, reps: '8-10', rest: '90秒', tips: '核心收紧，目视前方，推举时手臂不要完全锁死', bilibili: 'https://search.bilibili.com/video?keyword=杠铃实力举', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' },
+      { name: '卧推', muscle: '胸部', equipment: '杠铃', level: '中级', sets: 4, reps: '8-12', rest: '90秒', tips: '握距略宽于肩，推到顶峰时胸肌收紧，下放时控制速度', bilibili: 'https://search.bilibili.com/video?keyword=杠铃卧推', youtube: 'https://www.youtube.com/watch?v=rT7DgCr-3pg' },
+      { name: '哑铃斜推', muscle: '上胸', equipment: '哑铃', level: '初级', sets: 3, reps: '10-12', rest: '60秒', tips: '躺椅倾斜30-45度，哑铃置于胸部两侧，向上推起', bilibili: 'https://search.bilibili.com/video?keyword=哑铃上斜卧推', youtube: 'https://www.youtube.com/watch?v=DbFgADa2PL8' },
+      { name: '绳索面拉', muscle: '后束', equipment: '绳索', level: '初级', sets: 3, reps: '12-15', rest: '60秒', tips: '拉力器调至面部高度，双手握绳向外拉开，保持肩胛骨夹紧', bilibili: 'https://search.bilibili.com/video?keyword=绳索面拉', youtube: 'https://www.youtube.com/watch?v=rep-Q5COmSU' },
+      { name: '侧平举', muscle: '中束', equipment: '哑铃', level: '初级', sets: 3, reps: '12-15', rest: '60秒', tips: '手臂微屈，不要耸肩，用肩部发力而非惯性', bilibili: 'https://search.bilibili.com/video?keyword=哑铃侧平举', youtube: 'https://www.youtube.com/watch?v=3VcKaXpzqRo' },
+      { name: '过头臂屈伸', muscle: '三头肌', equipment: '哑铃/绳索', level: '初级', sets: 3, reps: '10-12', rest: '60秒', tips: '手臂高举过头，肘部朝向正前方，控制下放速度', bilibili: 'https://search.bilibili.com/video?keyword=哑铃过头臂屈伸', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' }
+    ],
+    pull: [
+      { name: 'T杠划船', muscle: '背部', equipment: 'T杠架', level: '中级', sets: 4, reps: '8-10', rest: '90秒', tips: '臀部低于肩膀，背部挺直，拉至腹部位置', bilibili: 'https://search.bilibili.com/video?keyword=T杠划船', youtube: 'https://www.youtube.com/watch?v=8P1r-T_X_W0' },
+      { name: '助力引体', muscle: '背阔肌', equipment: '引体架', level: '初级', sets: 3, reps: '8-10', rest: '90秒', tips: '宽握距，下巴过杠顶峰收紧背阔肌，控制下放', bilibili: 'https://search.bilibili.com/video?keyword=助力引体向上', youtube: 'https://www.youtube.com/watch?v=eGo4IYlbE5g' },
+      { name: '单臂哑铃划船', muscle: '背阔肌/菱形肌', equipment: '哑铃', level: '初级', sets: 3, reps: '10-12', rest: '60秒', tips: '单手撑在凳上，另一手握哑铃划船，保持背部挺直', bilibili: 'https://search.bilibili.com/video?keyword=单臂哑铃划船', youtube: 'https://www.youtube.com/watch?v=roddrCDamHs' },
+      { name: '直臂下压', muscle: '下背阔', equipment: '绳索', level: '初级', sets: 3, reps: '12-15', rest: '60秒', tips: '手臂伸直固定，肘部微屈，用背阔肌发力下压', bilibili: 'https://search.bilibili.com/video?keyword=直臂下压', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' },
+      { name: '二头弯举', muscle: '肱二头肌', equipment: '杠铃/哑铃', level: '初级', sets: 3, reps: '10-12', rest: '60秒', tips: '大臂垂直固定，不要借力弯举，充分收缩顶峰', bilibili: 'https://search.bilibili.com/video?keyword=杠铃弯举', youtube: 'https://www.youtube.com/watch?v=ykBuc5W1J9w' },
+      { name: '农夫行走', muscle: '核心/前臂', equipment: '哑铃/壶铃', level: '初级', sets: 3, reps: '30米', rest: '60秒', tips: '挺胸收腹，肩膀向后夹紧，行走时保持身体稳定', bilibili: 'https://search.bilibili.com/video?keyword=农夫行走', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' }
+    ],
+    legs: [
+      { name: '深蹲', muscle: '股四头肌/臀肌', equipment: '杠铃', level: '中级', sets: 4, reps: '8-10', rest: '120秒', tips: '脚距与肩同宽或略宽，蹲至大腿与地面平行，膝盖与脚尖同向', bilibili: 'https://search.bilibili.com/video?keyword=杠铃深蹲', youtube: 'https://www.youtube.com/watch?v=ultWZbUMPL8' },
+      { name: '罗马尼亚硬拉', muscle: '腘绳肌/臀肌', equipment: '杠铃', level: '中级', sets: 4, reps: '10-12', rest: '90秒', tips: '屈髋向下送，杠铃沿腿下放，保持背部挺直，膝盖微屈', bilibili: 'https://search.bilibili.com/video?keyword=罗马尼亚硬拉', youtube: 'https://www.youtube.com/watch?v=JCXUYuzwNrM' },
+      { name: '保加利亚分腿蹲', muscle: '股四头肌/臀肌', equipment: '哑铃/自重', level: '中级', sets: 3, reps: '10-12/侧', rest: '60秒', tips: '后脚置于凳上，前腿下蹲至大腿与地面平行', bilibili: 'https://search.bilibili.com/video?keyword=保加利亚分腿蹲', youtube: 'https://www.youtube.com/watch?v=ot_to5aVXOI' },
+      { name: '腿弯举', muscle: '腘绳肌', equipment: '腿弯举机', level: '初级', sets: 3, reps: '12-15', rest: '60秒', tips: '腹部贴在垫子上，弯举时大腿后侧充分收缩', bilibili: 'https://search.bilibili.com/video?keyword=腿弯举', youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg' },
+      { name: '腿伸展', muscle: '股四头肌', equipment: '腿伸展机', level: '初级', sets: 3, reps: '12-15', rest: '60秒', tips: '腿完全伸直时收紧股四头肌，控制下放速度', bilibili: 'https://search.bilibili.com/video?keyword=腿伸展器械', youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg' },
+      { name: '提踵', muscle: '小腿', equipment: '器械/自重', level: '初级', sets: 4, reps: '15-20', rest: '45秒', tips: '站在垫子上或台阶边缘，充分提踵后缓慢下放', bilibili: 'https://search.bilibili.com/video?keyword=站姿提踵', youtube: 'https://www.youtube.com/watch?v=gwLzBJYoWlI' }
+    ]
+  },
+  ectomorph: {
+    label: '外胚型',
+    push: [
+      // 低容量高强度: 2-3组, 少而重, 长休息
+      { name: '实力举', muscle: '肩部', equipment: '杠铃', level: '中级', sets: 3, reps: '6-8', rest: '120秒', tips: '核心收紧，重量偏大，充分休息后发力', bilibili: 'https://search.bilibili.com/video?keyword=杠铃实力举', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' },
+      { name: '卧推', muscle: '胸部', equipment: '杠铃', level: '中级', sets: 3, reps: '6-8', rest: '120秒', tips: '重量选择偏大，推到力竭，胸肌充分收缩', bilibili: 'https://search.bilibili.com/video?keyword=杠铃卧推', youtube: 'https://www.youtube.com/watch?v=rT7DgCr-3pg' },
+      { name: '哑铃斜推', muscle: '上胸', equipment: '哑铃', level: '初级', sets: 2, reps: '8-10', rest: '90秒', tips: '用较重重量，每组8-10次充分', bilibili: 'https://search.bilibili.com/video?keyword=哑铃上斜卧推', youtube: 'https://www.youtube.com/watch?v=DbFgADa2PL8' },
+      { name: '绳索面拉', muscle: '后束', equipment: '绳索', level: '初级', sets: 2, reps: '10-12', rest: '90秒', tips: '小重量多次数，肩胛骨夹紧', bilibili: 'https://search.bilibili.com/video?keyword=绳索面拉', youtube: 'https://www.youtube.com/watch?v=rep-Q5COmSU' },
+      { name: '侧平举', muscle: '中束', equipment: '哑铃', level: '初级', sets: 2, reps: '10-12', rest: '90秒', tips: '轻重量高次数，泵感为主', bilibili: 'https://search.bilibili.com/video?keyword=哑铃侧平举', youtube: 'https://www.youtube.com/watch?v=3VcKaXpzqRo' },
+      { name: '过头臂屈伸', muscle: '三头肌', equipment: '哑铃', level: '初级', sets: 2, reps: '8-10', rest: '90秒', tips: '三头肌孤立发力，不要借力', bilibili: 'https://search.bilibili.com/video?keyword=哑铃过头臂屈伸', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' }
+    ],
+    pull: [
+      { name: 'T杠划船', muscle: '背部', equipment: 'T杠架', level: '中级', sets: 3, reps: '8-10', rest: '120秒', tips: '背部发力，拉至腹部，保持背部挺直', bilibili: 'https://search.bilibili.com/video?keyword=T杠划船', youtube: 'https://www.youtube.com/watch?v=8P1r-T_X_W0' },
+      { name: '助力引体', muscle: '背阔肌', equipment: '引体架', level: '初级', sets: 2, reps: '6-8', rest: '120秒', tips: '大重量低次数，充分离心收缩', bilibili: 'https://search.bilibili.com/video?keyword=助力引体向上', youtube: 'https://www.youtube.com/watch?v=eGo4IYlbE5g' },
+      { name: '单臂哑铃划船', muscle: '背阔肌/菱形肌', equipment: '哑铃', level: '初级', sets: 2, reps: '8-10', rest: '90秒', tips: '慢起慢落，充分拉伸背阔肌', bilibili: 'https://search.bilibili.com/video?keyword=单臂哑铃划船', youtube: 'https://www.youtube.com/watch?v=roddrCDamHs' },
+      { name: '直臂下压', muscle: '下背阔', equipment: '绳索', level: '初级', sets: 2, reps: '10-12', rest: '90秒', tips: '控制速度，背阔肌发力', bilibili: 'https://search.bilibili.com/video?keyword=直臂下压', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' },
+      { name: '二头弯举', muscle: '肱二头肌', equipment: '杠铃', level: '初级', sets: 2, reps: '8-10', rest: '90秒', tips: '大臂固定，充分顶峰收缩', bilibili: 'https://search.bilibili.com/video?keyword=杠铃弯举', youtube: 'https://www.youtube.com/watch?v=ykBuc5W1J9w' },
+      { name: '农夫行走', muscle: '核心/前臂', equipment: '哑铃', level: '初级', sets: 2, reps: '30米', rest: '90秒', tips: '核心收紧，肩膀向后', bilibili: 'https://search.bilibili.com/video?keyword=农夫行走', youtube: 'https://www.youtube.com/watch?v=2yQj_XYr-U0' }
+    ],
+    legs: [
+      { name: '深蹲', muscle: '股四头肌/臀肌', equipment: '杠铃', level: '中级', sets: 3, reps: '6-8', rest: '150秒', tips: '重量偏大，每组6-8次充分力竭，长休息', bilibili: 'https://search.bilibili.com/video?keyword=杠铃深蹲', youtube: 'https://www.youtube.com/watch?v=ultWZbUMPL8' },
+      { name: '罗马尼亚硬拉', muscle: '腘绳肌/臀肌', equipment: '杠铃', level: '中级', sets: 3, reps: '8-10', rest: '120秒', tips: '腘绳肌充分拉长，控制下放速度', bilibili: 'https://search.bilibili.com/video?keyword=罗马尼亚硬拉', youtube: 'https://www.youtube.com/watch?v=JCXUYuzwNrM' },
+      { name: '保加利亚分腿蹲', muscle: '股四头肌/臀肌', equipment: '哑铃', level: '中级', sets: 2, reps: '8-10/侧', rest: '90秒', tips: '单侧训练，充分力竭后换边', bilibili: 'https://search.bilibili.com/video?keyword=保加利亚分腿蹲', youtube: 'https://www.youtube.com/watch?v=ot_to5aVXOI' },
+      { name: '腿弯举', muscle: '腘绳肌', equipment: '腿弯举机', level: '初级', sets: 2, reps: '10-12', rest: '90秒', tips: '腘绳肌充分收缩', bilibili: 'https://search.bilibili.com/video?keyword=腿弯举', youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg' },
+      { name: '腿伸展', muscle: '股四头肌', equipment: '腿伸展机', level: '初级', sets: 2, reps: '10-12', rest: '90秒', tips: '股四头肌顶峰收缩1秒', bilibili: 'https://search.bilibili.com/video?keyword=腿伸展器械', youtube: 'https://www.youtube.com/watch?v=ELOCsoDSmRg' },
+      { name: '提踵', muscle: '小腿', equipment: '器械', level: '初级', sets: 3, reps: '15-20', rest: '60秒', tips: '站在垫子上，充分提踵后缓慢下放', bilibili: 'https://search.bilibili.com/video?keyword=站姿提踵', youtube: 'https://www.youtube.com/watch?v=gwLzBJYoWlI' }
+    ]
+  }
 };
 
 export const dietData = {

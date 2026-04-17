@@ -240,7 +240,8 @@ function showTrainingDay(day) {
 }
 
 function showExerciseDetail(day, index) {
-  const exercise = exercises[day][index];
+  const bodyType = state.currentBodyType || 'mesomorph';
+  const exercise = exercises[bodyType]?.[day]?.[index];
   if (!exercise) return;
 
   const modalContent = `
@@ -620,7 +621,8 @@ function renderTrainingTab(activeDay) {
     activeDay = days[trainingDay];
   }
 
-  const currentExercises = exercises[activeDay] || exercises.push;
+  const bodyType = state.currentBodyType || 'mesomorph';
+  const currentExercises = exercises[bodyType]?.[activeDay] || exercises.mesomorph?.push || exercises.push;
 
   return `
     <div class="training-tab">
